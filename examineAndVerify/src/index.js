@@ -12,8 +12,6 @@ import { config, api} from './app';
 const store = configureStore();
  class APP extends React.Component {
 
-
-
      // SceneConfigs   可选的函数，用来配置场景动画和手势。会带有两个参数调用，
      // 一个是当前的路由，一个是当前的路由栈。然后它应当返回一个场景配置对象
 

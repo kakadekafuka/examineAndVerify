@@ -4,15 +4,12 @@
 import React, { Component } from 'react';
 import {View, StyleSheet, Image, Text, Dimensions, TouchableOpacity, Keyboard, LayoutAnimation} from 'react-native';
 import { styles, colors, toast, L, hang} from '../../app';
-
-
 import Button from 'react-native-button';
-
 import TextField from '../../widgets/TextField';
 import NetUitl from '../../libs/NetUtil';
-
+import ProductList from '../inlet/ProductList';
 var Spinner = require('react-native-spinkit');
-
+import ProductListContainer from '../containers/ProductListContainer'
 export default class Login extends React.Component {
 
     constructor(props) {
@@ -53,7 +50,6 @@ export default class Login extends React.Component {
         }
     }
 
-
     async _login() {
         // if (this._email.value.length < 1) {
         //     this._email.focus();
@@ -67,42 +63,34 @@ export default class Login extends React.Component {
         // }
 
         let formData = new FormData();
-        formData.append("userName","xinxy");
-        formData.append("userPass","+1LXvT90JBc=");
+        formData.append("userName", "xinxy");
+        formData.append("userPass", "+1LXvT90JBc=");
 
         hang();
         let url = "http://www.zjscs.net:81/dcapi/api/app/cgf/login";
-        NetUitl.postFrom(url,formData,(responseText) => {
-            console.log("responseText====",responseText);
+        NetUitl.postFrom(url, formData, (responseText) => {
+            console.log("responseText====", responseText);
             alert(responseText);
-            let { flag, mc, cgxtip,data } = responseText;
-
-            alert(responseText.mc);
             // toast(L(responseText.flag), 70);
+            toast(L("欢迎您：", +responseText.mc), 70);
+            this.onLoginSuccess();
         })
 
         hang(false);
+    }
 
-
-        {/*hang();*/}
-        {/*// let user = airloy.auth.formUser(this._email.value, this._password.value);*/}
-        {/*console.debug('-------------------- did schedule');*/}
-
-        // let user = airloy.auth.formUser('15237186505@139.com', '41022319890210');
-        // console.log("email====",user);
-        //
-        // let result = await airloy.net.httpPost(api.public.sign, user);
-        // console.log("result=1===",result);
-        // console.log("result==2==",result.info.id);
-        // console.log("result==3==",result.info.transfer);
-        // if (result.success) {
-        //     // await airloy.auth.saveUser(result.info);
-        //     // analytics.onProfileSignIn('' + result.info.id);
-        //     this.onSigned(result.info.transfer);
-        // } else {
-        //     toast(L(result.message), 70);
-        // }
-        // hang(false);
+    //跳转到第二个页面去
+    onLoginSuccess()
+    {
+        const {navigator} = this.props;
+        if (navigator) {
+            navigator.push({
+                component: ProductListContainer
+                // params: {
+                // 	rowData
+                // }
+            })
+        }
     }
 
     render() {
@@ -138,13 +126,7 @@ export default class Login extends React.Component {
                             注册 / 登录
                         </Button>
                     </View>
-
-
                 </View>
-
-
-
-
             </View>
         );
     }
