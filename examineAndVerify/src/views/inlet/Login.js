@@ -10,6 +10,9 @@ import Button from 'react-native-button';
 
 import TextField from '../../widgets/TextField';
 import NetUitl from '../../libs/NetUtil';
+
+var Spinner = require('react-native-spinkit');
+
 export default class Login extends React.Component {
 
     constructor(props) {
@@ -52,42 +55,38 @@ export default class Login extends React.Component {
 
 
     async _login() {
-        if (this._email.value.length = 0) {
-            this._email.focus();
-            toast(L("请输入用户名称"), 70);
-            return;
-        }
-        if (this._password.value.length = 0) {
-            this._password.focus();
-            toast(L("请输入密码"), 70);
-            return;
-        }
+        // if (this._email.value.length < 1) {
+        //     this._email.focus();
+        //     toast(L("请输入用户名称"), 70);
+        //     return;
+        // }
+        // if (this._password.value.length < 1 ){
+        //     this._password.focus();
+        //     toast(L("请输入密码"), 70);
+        //     return;
+        // }
 
         let formData = new FormData();
         formData.append("userName","xinxy");
         formData.append("userPass","+1LXvT90JBc=");
 
-        // if (this._email.value.length < 5) {
-        //     this._email.focus();
-        //     return;
-        // }
-        // if (this._password.value.length < 6) {
-        //     this._password.focus();
-        //     return;
-        // }
-
+        hang();
         let url = "http://www.zjscs.net:81/dcapi/api/app/cgf/login";
-        NetUitl.postJson(url,formData,(responseText) => {
+        NetUitl.postFrom(url,formData,(responseText) => {
+            console.log("responseText====",responseText);
             alert(responseText);
-            // this.onLoginSuccess();
+            let { flag, mc, cgxtip,data } = responseText;
+
+            alert(responseText.mc);
+            // toast(L(responseText.flag), 70);
         })
-        // this.onLoginSuccess();
+
+        hang(false);
 
 
-        // hang();
-        // let user = airloy.auth.formUser(this._email.value, this._password.value);
-        // console.debug('-------------------- did schedule');
-
+        {/*hang();*/}
+        {/*// let user = airloy.auth.formUser(this._email.value, this._password.value);*/}
+        {/*console.debug('-------------------- did schedule');*/}
 
         // let user = airloy.auth.formUser('15237186505@139.com', '41022319890210');
         // console.log("email====",user);
@@ -139,13 +138,20 @@ export default class Login extends React.Component {
                             注册 / 登录
                         </Button>
                     </View>
+
+
                 </View>
+
+
+
+
             </View>
         );
     }
 }
 
 const style = StyleSheet.create({
+
     window: {
         flex: 1,
         backgroundColor: 'gray'

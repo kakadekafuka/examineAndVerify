@@ -5,35 +5,21 @@
 import React from 'react'
 import {View, StyleSheet} from 'react-native'
 import RootSiblings from 'react-native-root-siblings'
-import Spinner from 'react-native-spinkit';
+// import Spinner from 'react-native-spinkit';
 
 import {colors} from '../views/styles'
 import util from '../libs/Util';
-
-const style = StyleSheet.create({
-  container: {
-    top: util.isAndroid() ? 5 : 20,
-    right: 5,
-    bottom: 5,
-    left: 5,
-    backgroundColor: colors.dark2,
-    borderRadius: 10,
-    opacity: 0.5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
+var Spinner = require('react-native-spinkit');
 
 let indicator = null;
 
 export default class ActivityIndicator {
 
-  static show(type='Circle') {
+  static show(type='Wave') {
     indicator || (
       indicator = new RootSiblings(
         <View style={style.container}>
-          <Spinner isVisible={true} size={100} type={type} color={colors.accent}/>
+          <Spinner   isVisible={true} size={100} type={type} color={colors.accent}/>
         </View>
       )
     );
@@ -43,3 +29,17 @@ export default class ActivityIndicator {
     indicator && indicator.destroy() || (indicator = null);
   }
 }
+const style = StyleSheet.create({
+    container: {
+        top: util.isAndroid() ? 5 : 20,
+        right: 5,
+        bottom: 5,
+        left: 5,
+        borderRadius: 10,
+        opacity: 0.5,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+})
+

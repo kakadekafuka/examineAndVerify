@@ -12,7 +12,7 @@ const colors = {
   bright1: '#EFEFF4',
   bright2: '#DCDCE4',
   border: '#CCCCCC',
-  accent: '#FDC02F',
+  accent: '#000000',
   action: '#4CD964',
   dark1: '#000000',
   dark2: '#666666',

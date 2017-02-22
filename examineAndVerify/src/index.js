@@ -8,6 +8,7 @@ import configureStore from './views/store/store.js'
 import {
     Navigator
 } from 'react-native';
+import { config, api} from './app';
 const store = configureStore();
  class APP extends React.Component {
 
