@@ -7,9 +7,12 @@ import { styles, colors, toast, L, hang} from '../../app';
 import Button from 'react-native-button';
 import TextField from '../../widgets/TextField';
 import NetUitl from '../../libs/NetUtil';
+<<<<<<< HEAD
 import ProductList from '../inlet/ProductList';
 var Spinner = require('react-native-spinkit');
 import ProductListContainer from '../containers/ProductListContainer'
+=======
+>>>>>>> parent of 6fd0e86... 完成悬浮框及json解析
 export default class Login extends React.Component {
 
     constructor(props) {
@@ -51,17 +54,31 @@ export default class Login extends React.Component {
     }
 
     async _login() {
-        // if (this._email.value.length < 1) {
+        if (this._email.value.length = 0) {
+            this._email.focus();
+            toast(L("请输入用户名称"), 70);
+            return;
+        }
+        if (this._password.value.length = 0) {
+            this._password.focus();
+            toast(L("请输入密码"), 70);
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append("userName","xinxy");
+        formData.append("userPass","+1LXvT90JBc=");
+
+        // if (this._email.value.length < 5) {
         //     this._email.focus();
-        //     toast(L("请输入用户名称"), 70);
         //     return;
         // }
-        // if (this._password.value.length < 1 ){
+        // if (this._password.value.length < 6) {
         //     this._password.focus();
-        //     toast(L("请输入密码"), 70);
         //     return;
         // }
 
+<<<<<<< HEAD
         let formData = new FormData();
         formData.append("userName", "xinxy");
         formData.append("userPass", "+1LXvT90JBc=");
@@ -74,8 +91,16 @@ export default class Login extends React.Component {
             // toast(L(responseText.flag), 70);
             toast(L("欢迎您：", +responseText.mc), 70);
             this.onLoginSuccess();
+=======
+        let url = "http://www.zjscs.net:81/dcapi/api/app/cgf/login";
+        NetUitl.postJson(url,formData,(responseText) => {
+            alert(responseText);
+            // this.onLoginSuccess();
+>>>>>>> parent of 6fd0e86... 完成悬浮框及json解析
         })
+        // this.onLoginSuccess();
 
+<<<<<<< HEAD
         hang(false);
     }
 
@@ -91,6 +116,29 @@ export default class Login extends React.Component {
                 // }
             })
         }
+=======
+
+        // hang();
+        // let user = airloy.auth.formUser(this._email.value, this._password.value);
+        // console.debug('-------------------- did schedule');
+
+
+        // let user = airloy.auth.formUser('15237186505@139.com', '41022319890210');
+        // console.log("email====",user);
+        //
+        // let result = await airloy.net.httpPost(api.public.sign, user);
+        // console.log("result=1===",result);
+        // console.log("result==2==",result.info.id);
+        // console.log("result==3==",result.info.transfer);
+        // if (result.success) {
+        //     // await airloy.auth.saveUser(result.info);
+        //     // analytics.onProfileSignIn('' + result.info.id);
+        //     this.onSigned(result.info.transfer);
+        // } else {
+        //     toast(L(result.message), 70);
+        // }
+        // hang(false);
+>>>>>>> parent of 6fd0e86... 完成悬浮框及json解析
     }
 
     render() {
@@ -133,7 +181,6 @@ export default class Login extends React.Component {
 }
 
 const style = StyleSheet.create({
-
     window: {
         flex: 1,
         backgroundColor: 'gray'
